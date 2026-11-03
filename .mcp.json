@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "anymodelbot-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}

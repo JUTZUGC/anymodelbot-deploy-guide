@@ -1,0 +1,107 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "anymodelbot",
+    "nameCn": "AnyModelBot",
+    "repoName": "anymodelbot-deploy-guide",
+    "oneLiner": "一个 bot 一个人设，带自己的模型、工作区和记忆，还能在微信、飞书里找到它",
+    "officialRepo": "https://github.com/modelflare-ai/AnyModelBot",
+    "officialDocs": "https://github.com/modelflare-ai/AnyModelBot#readme",
+    "stars": "1460",
+    "license": "MIT",
+    "highlights": [
+      "一人设一 bot，模型与记忆各自独立",
+      "多渠道：微信、飞书、Telegram、Slack、Discord",
+      "能读写文件、跑命令，越界前先问你",
+      "70+ 模型走一个 Key，按 token 计费",
+      "桌面端、命令行、Docker、网页四种运行方式",
+      "数据留本机，MIT 开源"
+    ],
+    "mcpSupport": "项目本身不含 MCP；本仓库的 MCP 只提供部署步骤、端口与常见问题。",
+    "webuiUrl": "http://localhost:3600",
+    "adapterPorts": "",
+    "collectedAt": "2026-11-03",
+    "verification": [
+      [
+        "README 确认 Docker 镜像、3600 端口与 ui-token 机制",
+        "已核对 2026-11-03"
+      ],
+      [
+        "确认桌面端、Docker、源码与命令行四种运行方式",
+        "已核对 2026-11-03"
+      ],
+      [
+        "未实测拉取镜像与连接渠道",
+        "说明 2026-11-03"
+      ],
+      [
+        "MCP 冒烟：initialize / tools/list 返回 get_guide、search_guide、get_project_info",
+        "已验证 2026-11-03"
+      ],
+      [
+        "非目标宿主调用 get_guide 被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-11-03"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "steps": [
+        "docker run -d --name amb -p 3600:3600 -v amb-data:/data ghcr.io/modelflare-ai/anymodel-bot",
+        "docker exec amb cat /data/ui-token",
+        "echo \"拿到令牌后用浏览器打开本机 3600 端口，地址带 token 参数\""
+      ],
+      "stepsPs": [
+        "docker run -d --name amb -p 3600:3600 -v amb-data:/data ghcr.io/modelflare-ai/anymodel-bot",
+        "docker exec amb cat /data/ui-token",
+        "Write-Host \"拿到令牌后用浏览器打开本机 3600 端口，地址带 token 参数\""
+      ],
+      "source": "https://github.com/modelflare-ai/AnyModelBot#用-docker-部署到-nas-或服务器"
+    },
+    "pitfalls": [
+      "打不开控制台：地址要带 `?token=`，令牌从容器里读",
+      "登录失败：Docker 环境改用 API Key，不要等浏览器回调",
+      "模型报错：确认 Key 有额度，模型名拼写正确",
+      "容器重启后数据没了：确认挂载了 `amb-data` 卷",
+      "微信收不到消息：检查连接 token 与单聊限制",
+      "端口冲突：改宿主端口映射，容器内仍是 3600",
+      "权限过大：只给它必要的工作区，别挂整个磁盘"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/anymodelbot-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/anymodelbot-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "AnyModelBot",
+    "AnyModelBot 部署",
+    "本地 AI bot",
+    "微信 AI 机器人",
+    "飞书 AI bot",
+    "自托管 AI 助手",
+    "Docker AI bot",
+    "anymodelbot 教程",
+    "多模型 bot",
+    "anymodelbot deploy guide"
+  ],
+  "topics": [
+    "ai-agents",
+    "chatbot",
+    "self-hosted",
+    "docker",
+    "wechat",
+    "anymodelbot"
+  ]
+}
